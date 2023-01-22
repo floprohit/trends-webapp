@@ -1,1 +1,7 @@
-<p>home works!</p>
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="row">
+<div class="col-md-3 mb-4" *ngFor="let product of product_list | paginate: { itemsPerPage: 8, currentPage: p }">
+  <app-productcard [productData]="product"></app-productcard>
+</div>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './core/auth-guard/auth.guard';
 import { AuthComponent } from './layouts/auth/auth.component';
 import { MainComponent } from './layouts/main/main.component';
 import { LoginComponent } from './modules/auth-components/login/login.component';
@@ -24,11 +25,10 @@ redirectTo:"/login"
   {
     path:"",
     component:MainComponent,
+    canActivate:[AuthGuard],
     children:[
-      {
-        path:'home',
-        component:HomeComponent
-      }
+      {path:'home',component:HomeComponent},
+      {path:'product',loadChildren:()=> import('./modules/main-components/productinventory/productinventory.module').then(m=>m.ProductinventoryModule)},
     ]
   }
 ];
